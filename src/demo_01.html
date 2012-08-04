@@ -6,7 +6,19 @@
   </head>
   <body>
     <div data-bind="foreach: questions">
-      <div data-bind="text: $data" />
+      <div>
+        Title: <input data-bind="value: title" />
+      </div>
+      <div data-bind="if: questionType == 'multipleChoice'">
+        <ul data-bind="foreach: answers">
+          <li>Answer: <input data-bind="value: title" /></li>
+        </ul>
+        <button data-bind="click: addAnswer">Add answer</button>
+      </div>
     </div>
+    <button data-bind="click: addTextQuestion">Add text question</button>
+    <button data-bind="click: addMultipleChoiceQuestion">Add multiple choice question</button>
+
+    <div data-bind="text: getJSON"></div>
   </body>
 </html>
