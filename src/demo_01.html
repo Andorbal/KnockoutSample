@@ -1,23 +1,58 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="Stylesheet" type="text/css" href="demo_01.css" />
+    <link rel="Stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.8.22.custom.css" />
+    <script src="scripts/jquery-1.7.2.min.js"></script>
+    <script src="scripts/jquery-ui-1.8.22.custom.min.js"></script>
     <script data-main="scripts/demo_01/main" 
             src="scripts/require.js"></script>
   </head>
   <body>
-    <div data-bind="foreach: questions">
-      <div>
-        Title: <input data-bind="value: title" />
-      </div>
-      <div data-bind="if: questionType == 'multipleChoice'">
-        <ul data-bind="foreach: answers">
-          <li>Answer: <input data-bind="value: title" /></li>
-        </ul>
-        <button data-bind="click: addAnswer">Add answer</button>
-      </div>
-    </div>
-    <button data-bind="click: addTextQuestion">Add text question</button>
-    <button data-bind="click: addMultipleChoiceQuestion">Add multiple choice question</button>
+    <span data-bind="click: addTextQuestion">
+      <img src="images/btn_add.png" alt="Add Question">
+      Add text question
+    </span>
+    <span data-bind="click: addMultipleChoiceQuestion">
+      <img src="images/btn_add.png" alt="Add Question">
+      Add multiple choice question
+    </span>
+    <ul data-bind="foreach: questions" class="questions">
+      <li>
+        <h4>
+          <img src="images/question_handle.gif" class="question-handle" alt="Question Handle">
+          <img src="images/btn_delete.png" alt="Remove" class="survey-question-remove-action" data-bind="click: $parent.removeQuestion">
+          <span>Question </span><span data-bind="text: $index" />
+        </h4>
+        <div>
+          <input data-bind="value: title" />
+        </div>
+        <div data-bind="if: questionType == 'multipleChoice'" class="question-details">
+          <div>
+            Allow multiple answers to be selected: <input type="checkbox" data-bind="checked: allowMultipleAnswers" />
+          </div>
+          <div>
+            <span data-bind="click: addAnswer">
+              <img src="images/btn_add.png" alt="Add Question">
+              Add an answer
+            </span>
+          </div>
+          <ul data-bind="foreach: answers" class="answers">
+            <li>
+              <img src="images/question_option_handle.gif" alt="Move question answer" class="question-option-handle">
+              <span class="action-container">
+                <img src="images/btn_delete.png" alt="Remove answer" class="survey-question-remove-option-action" data-bind="click: $parent.removeAnswer">
+              </span>
+              <span class="action-container">
+                <img src="images/question_option_autoassign_off.gif" alt="Auto assign a characteristic" mv:characteristicid="" class="survey-question-add-option-characteristic">
+              </span>
+              <input data-bind="value: title" />
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+    <button data-bind="click: swapQuestions">Swap</button>
 
     <div data-bind="text: getJSON"></div>
   </body>
