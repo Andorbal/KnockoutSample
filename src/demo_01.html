@@ -5,8 +5,13 @@
     <link rel="Stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.8.22.custom.css" />
     <script src="scripts/jquery-1.7.2.min.js"></script>
     <script src="scripts/jquery-ui-1.8.22.custom.min.js"></script>
-    <script data-main="scripts/demo_01/main" 
-            src="scripts/require.js"></script>
+    <script src="scripts/knockout-2.1.0.js"></script>
+    <script src="scripts/knockout-sortable.js"></script>
+    <script src="scripts/demo_01/multipleChoiceAnswerViewModel.js"></script>
+    <script src="scripts/demo_01/multipleChoiceQuestionViewModel.js"></script>
+    <script src="scripts/demo_01/textQuestionViewModel.js"></script>
+    <script src="scripts/demo_01/surveyViewModel.js"></script>
+    <script src="scripts/demo_01/main.js"></script>
   </head>
   <body>
     <span data-bind="click: addTextQuestion">
@@ -17,7 +22,7 @@
       <img src="images/btn_add.png" alt="Add Question">
       Add multiple choice question
     </span>
-    <ul data-bind="foreach: questions" class="questions">
+    <ul data-bind="sortable: questions" class="questions">
       <li>
         <h4>
           <img src="images/question_handle.gif" class="question-handle" alt="Question Handle">
@@ -37,7 +42,7 @@
               Add an answer
             </span>
           </div>
-          <ul data-bind="foreach: answers" class="answers">
+          <ul data-bind="sortable: answers" class="answers">
             <li>
               <img src="images/question_option_handle.gif" alt="Move question answer" class="question-option-handle">
               <span class="action-container">
@@ -52,7 +57,6 @@
         </div>
       </li>
     </ul>
-    <button data-bind="click: swapQuestions">Swap</button>
 
     <div data-bind="text: getJSON"></div>
   </body>
